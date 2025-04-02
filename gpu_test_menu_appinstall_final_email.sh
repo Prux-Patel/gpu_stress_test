@@ -12,28 +12,47 @@ log() {
 
 # Function for installation
 install_dependencies() {
+  echo"----------------------------------------"
   log "Starting installation of dependencies..."
-  
+  echo"----------------------------------------"
+
+  echo"------------------------------------------"
   echo "Updating and upgrading system packages..."
+  echo"------------------------------------------"
   sudo apt update && sudo apt upgrade -y
 
+  echo"--------------------------------"
   echo "Installing required packages..."
+  echo"--------------------------------"
   sudo apt install -y python3-pip nvidia-cuda-toolkit mailx
 
+  echo"---------------------------------------------"
   echo "Installing PyTorch with CUDA 12.1 support..."
+  echo"---------------------------------------------"
   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
+  echo"---------------------"
   echo "Installing Ollama..."
+  echo"---------------------"
   curl -fsSL https://ollama.com/install.sh | sh
 
+  echo"----------------------------------"
   echo "Installing yq (YAML processor)..."
+  echo"----------------------------------"
   snap install yq
 
+  echo"-----------------------------"
   echo "Downloading Ollama models..."
+  echo"-----------------------------"
+  echo ""
+  echo"-------------"
   ollama pull mistral
+  echo"-------------"
   ollama pull llama3
+  echo"-------------"
   ollama pull gemma3
-
+  echo"-------------"
+  ech ""
   log "Installation completed."
 }
 
