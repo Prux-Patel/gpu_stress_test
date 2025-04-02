@@ -160,11 +160,11 @@ run_llm_test() {
 }
 
 # Function to email results
-send_email() {
-  log "Sending email with benchmark results..."
-  mailx -s "GPU Benchmark Results" -a $LOG_FILE -a $REPORT_FILE -a mistral_benchmark.csv -a llama3_benchmark.csv -a gemma3_benchmark.csv $EMAIL < $REPORT_FILE
-  log "Email sent successfully."
-}
+#send_email() {
+ # log "Sending email with benchmark results..."
+  #mailx -s "GPU Benchmark Results" -a $LOG_FILE -a $REPORT_FILE -a mistral_benchmark.csv -a llama3_benchmark.csv -a gemma3_benchmark.csv $EMAIL < $REPORT_FILE
+  #log "Email sent successfully."
+#}
 
 # Run all tests sequentially
 install_dependencies
@@ -173,6 +173,6 @@ run_llm_test "llama3" "Describe the history of neural networks."
 run_llm_test "gemma3" "Discuss the ethical implications of AI in business."
 
 # Send email after tests complete
-send_email
+python3 /root/send_email.py
 
 echo "✅ All tests completed and results emailed to $EMAIL."
