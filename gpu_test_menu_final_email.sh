@@ -12,24 +12,38 @@ log() {
 
 # Function for installation
 install_dependencies() {
+  echo "======================================="
   log "Starting installation of dependencies..."
-  
+  echo "======================================="
+
+  echo "========================================="
   echo "Updating and upgrading system packages..."
+  echo "========================================="
   sudo apt update && sudo apt upgrade -y
-
+  
+  echo "==============================="
   echo "Installing required packages..."
-  sudo apt install -y python3-pip nvidia-cuda-toolkit mailx
-
+  echo "==============================="
+  sudo apt install -y python3-pip nvidia-cuda-toolkit
+  
+  echo "============================================"
   echo "Installing PyTorch with CUDA 12.1 support..."
+  echo "============================================"
   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-
+  
+  echo "===================="
   echo "Installing Ollama..."
+  echo "===================="
   curl -fsSL https://ollama.com/install.sh | sh
-
+  
+  echo "================================="
   echo "Installing yq (YAML processor)..."
+  echo "================================="
   snap install yq
 
+  echo "============================"
   echo "Downloading Ollama models..."
+  echo "============================"
   ollama pull mistral
   ollama pull llama3
   ollama pull gemma3
@@ -116,7 +130,8 @@ run_llm_test() {
   AVG_MEMORY=$(echo "scale=2; $MEMORY_SUM / $LOG_COUNT" | bc)
   AVG_UTILIZATION=$(echo "scale=2; $UTILIZATION_SUM / $LOG_COUNT" | bc)
   AVG_TEMP=$(echo "scale=2; $TEMPERATURE_SUM / $LOG_COUNT" | bc)
-
+  echo ""
+  echo ""
   # Log final results
   log "$MODEL Test Completed"
   log "Total Inferences: $INFERENCE_COUNT"
@@ -125,7 +140,8 @@ run_llm_test() {
   log "Average GPU Utilization: $AVG_UTILIZATION%"
   log "Average GPU Temperature: $AVG_TEMP°C"
   log "Final Throughput: $FINAL_THROUGHPUT inferences/sec"
-
+  echo ""
+  echo ""
   # Append to Benchmark Report
   echo "===================================" >> $REPORT_FILE
   echo "      GPU Benchmark Report        " >> $REPORT_FILE
@@ -146,14 +162,16 @@ run_llm_test() {
 #  mailx -s "GPU Benchmark Results" -a $LOG_FILE -a $REPORT_FILE -a mistral_benchmark.csv -a llama3_benchmark.csv -a gemma3_benchmark.csv $EMAIL < $REPORT_FILE
 #  log "Email sent successfully."
 #}
-
+echo ""
+echo ""
 # Run all tests sequentially
 install_dependencies
 run_llm_test "mistral" "Summarize the impact of AI in healthcare."
 run_llm_test "llama3" "Describe the history of neural networks."
 run_llm_test "gemma3" "Discuss the ethical implications of AI in business."
-
+echo ""
+echo ""
 # Send email after tests complete
 python3 send_email.py
-
+echo ""
 echo "✅ All tests completed and results emailed to $EMAIL."
