@@ -26,9 +26,19 @@ install_dependencies() {
   echo "==============================="
   sudo apt install -y python3-pip nvidia-cuda-toolkit
   
-  echo "============================================"
-  echo "Installing PyTorch with CUDA 12.1 support..."
-  echo "============================================"
+  echo "====================="
+  echo "Installing PyTorch..."
+  echo "====================="
+  apt install python3-pip
+
+  echo "================================"
+  echo "Installing Nvidia-cuda-tookit..."
+  echo "================================"
+  apt install nvidia-cuda-toolkit
+
+  echo "================================"
+  echo "Installing Pytorch..."
+  echo "================================"
   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
   
   echo "===================="
@@ -47,6 +57,7 @@ install_dependencies() {
   ollama pull mistral
   ollama pull llama3
   ollama pull gemma3
+  echo ""
   echo "======================"
   log "Installation completed."
   echo "======================"
