@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 clear
 LOG_FILE="gpu_test_log.txt"
