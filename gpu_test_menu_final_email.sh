@@ -47,8 +47,9 @@ install_dependencies() {
   ollama pull mistral
   ollama pull llama3
   ollama pull gemma3
-
+  echo "======================"
   log "Installation completed."
+  echo "======================"
 }
 
 # Function to run LLM test with benchmarking (2 parallel inferences)
@@ -56,8 +57,9 @@ run_llm_test() {
   MODEL=$1
   PROMPT=$2
   CSV_FILE="${MODEL}_benchmark.csv"
-
+  echo "======================"
   log "Starting $MODEL test..."
+  echo "======================"
   
   # Define test parameters
   LOG_INTERVAL=120  # Log every 2 minutes
