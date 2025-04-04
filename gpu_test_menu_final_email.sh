@@ -179,7 +179,7 @@ run_llm_test() {
   echo "===================================" >> $REPORT_FILE
   echo "      GPU Benchmark Report        " >> $REPORT_FILE
   echo "===================================" >> $REPORT_FILE
-  echo "GPU Model Tested: $GPU_MODEL"
+  echo "GPU Model Tested: $GPU_MODEL" >> $REPORT_FILE
   echo "Model Tested: $MODEL" >> $REPORT_FILE
   echo "Total Inferences: $INFERENCE_COUNT" >> $REPORT_FILE
   echo "Total Duration: $DURATION seconds" >> $REPORT_FILE
