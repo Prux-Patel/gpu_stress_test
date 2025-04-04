@@ -15,61 +15,67 @@ install_dependencies() {
   echo "======================================="
   log "Starting installation of dependencies..."
   echo "======================================="
-
+sleep 5
   echo "========================================="
   echo "Updating and upgrading system packages..."
   echo "========================================="
   sudo apt update && sudo apt upgrade -y
-  
+sleep 5  
   echo "==============================="
   echo "Installing required packages..."
   echo "==============================="
   sudo apt install -y python3-pip nvidia-cuda-toolkit
-  
+sleep 5  
   echo "====================="
   echo "Installing PyTorch..."
   echo "====================="
   apt install python3-pip
-
+sleep 5
   echo "================================"
   echo "Installing Nvidia-cuda-tookit..."
   echo "================================"
   apt install nvidia-cuda-toolkit
-
+sleep 5
   echo "================================"
   echo "Installing Pytorch..."
   echo "================================"
   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-  
+sleep 5  
   echo "===================="
   echo "Installing Ollama..."
   echo "===================="
   curl -fsSL https://ollama.com/install.sh | sh
-  
+sleep 5  
   echo "================================="
   echo "Installing yq (YAML processor)..."
   echo "================================="
   snap install yq
-
+sleep 5
   echo "============================"
   echo "Downloading Ollama models..."
   echo "============================"
+sleep 5  
   echo "============================"
   echo "Downloading Mistral model..."
   echo "============================"
-  ollama pull mistral
+sleep 5
+  ollama pull mistral  
   echo "============================"
   echo "Downloading Llama3 model...."
   echo "============================"
+sleep 5
   ollama pull llama3
   echo "============================"
   echo "Downloading gemma3 models..."
   echo "============================"
+sleep 5  
   ollama pull gemma3
+  
   echo ""
   echo "======================"
   log "Installation completed."
   echo "======================"
+sleep 5  
 }
 
 # Function to run LLM test with benchmarking (2 parallel inferences)
