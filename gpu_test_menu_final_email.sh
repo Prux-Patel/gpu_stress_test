@@ -54,8 +54,17 @@ install_dependencies() {
   echo "============================"
   echo "Downloading Ollama models..."
   echo "============================"
+  echo "============================"
+  echo "Downloading Mistral model..."
+  echo "============================"
   ollama pull mistral
+  echo "============================"
+  echo "Downloading Llama3 model...."
+  echo "============================"
   ollama pull llama3
+  echo "============================"
+  echo "Downloading gemma3 models..."
+  echo "============================"
   ollama pull gemma3
   echo ""
   echo "======================"
@@ -156,6 +165,7 @@ run_llm_test() {
   echo ""
   echo ""
   # Append to Benchmark Report
+  echo "$MODEL"
   echo "===================================" >> $REPORT_FILE
   echo "      GPU Benchmark Report        " >> $REPORT_FILE
   echo "===================================" >> $REPORT_FILE
