@@ -5,6 +5,10 @@ LOG_FILE="gpu_test_log.txt"
 REPORT_FILE="benchmark_report.txt"
 EMAIL="prakash.patel@cudoventures.com"
 
+# Get GPU Model
+GPU_MODEL=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits)
+echo "GPU Model: $GPU_MODEL" > $LOG_FILE  # Log GPU model at the beginning
+
 # Function to log messages
 log() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a $LOG_FILE
@@ -161,6 +165,7 @@ run_llm_test() {
   echo ""
   echo ""
   # Log final results
+  echo "GPU Model: $GPU_MODEL"
   log "$MODEL Test Completed"
   log "Total Inferences: $INFERENCE_COUNT"
   log "Total Duration: $DURATION seconds"
@@ -171,10 +176,10 @@ run_llm_test() {
   echo ""
   echo ""
   # Append to Benchmark Report
-  echo "$MODEL"
   echo "===================================" >> $REPORT_FILE
   echo "      GPU Benchmark Report        " >> $REPORT_FILE
   echo "===================================" >> $REPORT_FILE
+  echo "GPU Model Tested: $GPU_MODEL"
   echo "Model Tested: $MODEL" >> $REPORT_FILE
   echo "Total Inferences: $INFERENCE_COUNT" >> $REPORT_FILE
   echo "Total Duration: $DURATION seconds" >> $REPORT_FILE
